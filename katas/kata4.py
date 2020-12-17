@@ -16,16 +16,16 @@ def clean_up(lines):
 
 
 def min_delta(lines, data):
-    day = None
+    result = None
     delta = None
     for line in lines:
         min = line.split()[data.r_idx]
         max = line.split()[data.l_idx]
         new_delta = float(max) - float(min)
         if delta == None or delta > new_delta:
-           day = line.split()[data.res_idx]
+           result = line.split()[data.res_idx]
            delta = new_delta
-    return day
+    return result
 
 
 class WheatherData:
