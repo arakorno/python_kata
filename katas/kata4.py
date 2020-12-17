@@ -7,6 +7,14 @@ def read_data(data):
     f = open(abs_file_path, 'r')
     return f.read().splitlines()
 
+
+def clean_up(lines):
+    lines.pop(0)
+    lines = [l.replace('*', '') for l in lines]
+    lines = [lines.pop() if l == '' or '--' in l else l for l in lines]
+    return lines
+
+
 def min_delta(lines, data):
     day = None
     delta = None
@@ -18,12 +26,6 @@ def min_delta(lines, data):
            day = line.split()[data.res_idx]
            delta = new_delta
     return day
-
-def clean_up(lines):
-    lines.pop(0)
-    lines = [l.replace('*', '') for l in lines]
-    lines = [lines.pop() if l == '' or '--' in l else l for l in lines]
-    return lines
 
 
 class WheatherData:
@@ -39,8 +41,9 @@ class FootballData:
     l_idx = 6
     r_idx = 8
 
+
 w_data = WheatherData()
 f_data = FootballData()
 
-print(min_delta(clean_up(read_data(w_data)),w_data))
-print(min_delta(clean_up(read_data(f_data)),f_data))
+print(min_delta(clean_up(read_data(w_data)), w_data))
+print(min_delta(clean_up(read_data(f_data)), f_data))
